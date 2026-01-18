@@ -2,14 +2,16 @@ FROM maven:3.8.8-eclipse-temurin-8 AS build
 WORKDIR /app
 
 COPY pom.xml .
-RUN mvn -B -q dependency:resolve
+RUN mvn dependency:resolve
 
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:8-jre
-WORKDIR /app
-COPY --from=build /app/target/*.war app.war
+
+FROM tomcat:9.0-jdk8-temurin
+WORKDIR /usr/local/tomcat/webapps
+
+COPY --from=build /app/target/*.war ROOT.war
 
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.war"]
+CMD ["catalina.sh", "run"]
