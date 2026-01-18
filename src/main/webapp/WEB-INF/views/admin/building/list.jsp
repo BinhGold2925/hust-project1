@@ -348,7 +348,7 @@
                     // chờ 1.5s rồi reload
                     setTimeout(() => {
                         location.reload();
-                    }, 1500);
+                    }, 1000);
                 },
                 error: function (response){
                     console.info("failed");
@@ -391,7 +391,7 @@
                     // chờ 1.5s rồi reload
                     setTimeout(() => {
                         location.reload();
-                    }, 1500);
+                    }, 1000);
                 },
                 error: function (respond){
                     console.log("failed");
