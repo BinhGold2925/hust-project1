@@ -25,7 +25,7 @@
                         <i class="ace-icon fa fa-home home-icon"></i>
                         <a href="#">Home</a>
                     </li>
-                    <li class="active">Thêm Tòa Nhà</li>
+                    <li class="active">Sửa Hoặc Thêm Tòa Nhà</li>
                 </ul><!-- /.breadcrumb -->
             </div>
 
@@ -35,21 +35,18 @@
                 </div><!-- /.page-header -->
 
                 <div>
-                    <form:form modelAttribute="buildingEdit" id="listForm" method="GET">
+                    <form:form modelAttribute="buildingEdit" id="listForm" method="GET" enctype="multipart/form-data">
                         <div class="col-xs-12 building-form" style="background-color: #FEFBF7; border-radius: 10px; margin:12px; padding-top: 15px; border: 1px solid #e0e0e0;  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); transition: all 0.3s ease;">
 
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Tên tòa nhà</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Tên tòa nhà</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="name"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Quận</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Quận</label>
+                                    <div class="col-xs-5">
                                         <form:select class="form-control" path="district">
                                             <form:option value="">--Chọn Quận--</form:option>
                                             <form:options items="${district}"/>
@@ -57,124 +54,177 @@
                                     </div>
                                 </div>
                             </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Quận</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:select class="form-control" path="district">--%>
+<%--                                            <form:option value="">--Chọn Quận--</form:option>--%>
+<%--                                            <form:options items="${district}"/>--%>
+<%--                                        </form:select>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Phường</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px; ">Phường</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="ward"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Đường</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Đường</label>
+                                    <div class="col-xs-5">
                                         <form:input class="form-control" path="street"/>
                                     </div>
                                 </div>
                             </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Đường</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="street"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Kết Cấu</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Kết Cấu</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="structure"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Số tầng hầm</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Số tầng hầm</label>
+                                    <div class="col-xs-5">
                                         <form:input class="form-control" path="numberOfBasement"/>
                                     </div>
                                 </div>
                             </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Số tầng hầm</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="numberOfBasement"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Diện tích sàn</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Diện tích sàn</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="floorArea"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Hướng</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Hướng</label>
+                                    <div class="col-xs-5">
                                         <form:input class="form-control" path="direction"/>
                                     </div>
                                 </div>
                             </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Hướng</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="direction"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Hạng</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Hạng</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="level"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Diện tích
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Diện tích
                                         thuê</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-5">
                                         <form:input class="form-control" path="rentArea"/>
                                     </div>
                                 </div>
                             </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Diện tích--%>
+<%--                                        thuê</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="rentArea"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Giá thuê</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Giá thuê</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="rentPrice"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Mô tả giá</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Mô tả giá</label>
+                                    <div class="col-xs-5">
                                         <form:input class="form-control" path="rentPriceDescription"/>
                                     </div>
                                 </div>
                             </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Mô tả giá</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="rentPriceDescription"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Phí dịch vụ</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Phí dịch vụ</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="serviceFee"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Phí ô tô</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Phí ô tô</label>
+                                    <div class="col-xs-5">
                                         <form:input class="form-control" path="carFee"/>
                                     </div>
                                 </div>
                             </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Phí ô tô</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="carFee"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Phí mô tô</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Phí mô tô</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="motoFee"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Phí ngoài giờ</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Phí ngoài giờ</label>
+                                    <div class="col-xs-5">
                                         <form:input class="form-control" path="overtimeFee"/>
                                     </div>
                                 </div>
                             </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Phí ngoài giờ</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="overtimeFee"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Tiền điện</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Tiền điện</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="electricityFee"/>
+                                    </div>
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 0 0 5px;">Thời gian
+                                        thuê</label>
+                                    <div class="col-xs-5">
+                                        <form:input class="form-control" path="rentTime"/>
                                     </div>
                                 </div>
                             </div>
@@ -194,15 +244,15 @@
                                     </div>
                                 </div>
                             </di> -->
-                            <div class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Thời gian
-                                        thuê</label>
-                                    <div class="col-xs-10">
-                                        <form:input class="form-control" path="rentTime"/>
-                                    </div>
-                                </div>
-                            </div>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Thời gian--%>
+<%--                                        thuê</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="rentTime"/>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <!-- <di class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
                                     <label class="col-xs-3" style="margin:0; font-size: 20px;">Thời gian trang
@@ -214,20 +264,25 @@
                             </di> -->
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Tên quản lý</label>
-                                    <div class="col-xs-10">
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Tên quản lý</label>
+                                    <div class="col-xs-4">
                                         <form:input class="form-control" path="managerName"/>
                                     </div>
-                                </div>
-                            </div>
-                            <di class="form-group">
-                                <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">SDT quản lý</label>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-1"></div>
+                                    <label class="col-xs-1" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">SDT quản lý</label>
+                                    <div class="col-xs-5">
                                         <form:input class="form-control" path="managerPhone" />
                                     </div>
                                 </div>
-                            </di>
+                            </div>
+<%--                            <di class="form-group">--%>
+<%--                                <div class="col-xs-12" style="margin-bottom: 10px;">--%>
+<%--                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">SDT quản lý</label>--%>
+<%--                                    <div class="col-xs-10">--%>
+<%--                                        <form:input class="form-control" path="managerPhone" />--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </di>--%>
                             <!-- <di class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
                                     <label class="col-xs-3" style="margin:0; font-size: 20px;">Phí môi giới</label>
@@ -238,41 +293,54 @@
                             </di> -->
                             <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600;">Loại tòa nhà</label>
-                                    <div class="col-xs-10 checkboxes" style="font-size: 20px; font-weight:600;">
+                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Loại tòa nhà</label>
+                                    <div class="col-xs-10 checkboxes" style="font-size: 20px; font-weight:600; ">
                                         <form:checkboxes path="typeCode" items="${typeCodes}"/>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <di class="form-group">
+                            <div class="form-group">
                                 <div class="col-xs-12" style="margin-bottom: 10px;">
-                                    <label class="col-xs-3" style="margin:0; font-size: 20px;">Ghi chú</label>
-                                    <div class="col-xs-9">
-                                        <input type="text" class="form-control">
+                                    <label class="col-xs-2" style="margin:0; font-size: 20px; font-weight:600; padding: 0 5px;">Hình đại
+                                        diện</label>
+                                    <input type="file" id="uploadImage" class="col-xs-3" name="image" accept="image/*"
+                                           onchange="openImage(this, 'viewImage')"
+                                           style="margin:0; font-size: 20px; font-weight:600;"/>
+                                    <div class="col-xs-7">
+                                        <c:if test="${empty buildingEdit.image}">
+                                            <img src="/img/loading.gif" id="viewImage" width="300px" height="300px"
+                                                 style="object-fit: cover; border: 1px solid #ccc;">
+                                        </c:if>
+                                        <c:if test="${not empty buildingEdit.image}">
+                                            <img id="viewImage"
+                                                 src="${pageContext.request.contextPath}/repository${buildingEdit.image}"
+                                                 width="300" height="300"
+                                                 style="object-fit:cover;border:1px solid #ccc"/>
+                                        </c:if>
                                     </div>
                                 </div>
-                            </di> -->
+                            </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <div class="col-xs-2"></div>
                                     <div class="col-xs-10">
                                         <div class="pull-left">
                                             <c:if test="${not empty buildingEdit.id}">
-                                                <button class="btn btn-primary" type="button" id="btnAddBuilding" style="border-radius: 10px;">
+                                                <button class="cssdep" type="button" id="btnAddBuilding" style="border-radius: 10px;">
                                                     <i class="ace-icon glyphicon glyphicon-plus"></i>
                                                     Cập Nhật
                                                 </button>
-                                                <button class="btn btn-primary" type="button" id="btnCancel" style="border-radius: 10px;">
+                                                <button class="cssdep" type="button" id="btnCancel" style="border-radius: 10px;">
                                                     <i class="ace-icon glyphicon glyphicon-minus"></i>
                                                     Hủy Thao Tác
                                                 </button>
                                             </c:if>
                                             <c:if test="${empty buildingEdit.id}">
-                                                <button class="btn btn-primary" type="button" id="btnAddBuilding" style="border-radius: 10px;">
+                                                <button class="cssdep" type="button" id="btnAddBuilding" style="border-radius: 10px;">
                                                     <i class="ace-icon glyphicon glyphicon-plus"></i>
                                                     Thêm Tòa Nhà
                                                 </button>
-                                                <button class="btn btn-primary" type="button" id="btnCancel" style="border-radius: 10px;">
+                                                <button class="cssdep" type="button" id="btnCancel" style="border-radius: 10px;">
                                                     <i class="ace-icon glyphicon glyphicon-minus"></i>
                                                     Hủy Thao Tác
                                                 </button>
@@ -301,6 +369,19 @@
     </a>
 
     <script>
+        var imageBase64='';
+        var imageName='';
+
+        function openImage(input, imageView) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    document.getElementById(imageView).src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
         $('#btnAddBuilding').click(function (){
             var data = {};
             var typeCode=[];
@@ -312,13 +393,29 @@
                     typeCode.push(v.value);
                 }
             });
+            if ('' !== imageBase64) {
+                data['imageBase64'] = imageBase64;
+                data['imageName'] = imageName;
+            }
             data['typeCode']=typeCode;
+            $('#loading_image').show();
             if(typeCode!=''){
                 addOrUpdateBuilding(data);
                 console.log("ok");
             }else{
                 window.location.href="<c:url value="/admin/building-edit?typeCode=require"/>";
             }
+        });
+        $('#uploadImage').change(function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = e => {
+                imageBase64 = e.target.result;
+                imageName = file.name;
+            };
+            reader.readAsDataURL(file);
         });
         function addOrUpdateBuilding(data){
             $.ajax({
@@ -503,6 +600,39 @@
     .sidebar.menu-min .sidebar-shortcuts {
         z-index: 100;
     }
+    .cssdep {
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        box-shadow: 0 0 8px rgba(0, 245, 255, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #00f5ff, #a855f7);
+        padding: 8px 20px;
+        color: #000000 !important;
+        font-size: 15px;
+    }
+    .css a {
+        color: #000000 !important;
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    .cssdep a:hover {
+        color: #00f5ff !important;
+        text-decoration: none;
+    }
+    .cssdep:hover {
+        color: #00f5ff !important;
+        background: rgba(0, 0, 0, 0.55);
+        box-shadow:
+                0 0 14px rgba(168, 85, 247, 0.9),
+                0 0 28px rgba(0, 245, 255, 0.8);
+        transform: translateY(-2px);
+    }
 </style>
+
+
 </body>
 </html>

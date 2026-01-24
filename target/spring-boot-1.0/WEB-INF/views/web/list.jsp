@@ -3,7 +3,6 @@
 <%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
@@ -13,7 +12,7 @@
 </head>
 
 <body>
-<div class="page-wrapper">
+<div class="page-wrapper" style="background: #f4f7fa !important;">
     <%--<header>--%>
         <%--<!-- MENU  -->--%>
         <%--<div class="p-4">--%>
@@ -69,256 +68,107 @@
         </div>
     </div>
     <!-- SEARCH  -->
-    <div class="search">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-3 search-item">
-                    <p class="search-text">Chọn tỉnh/thành phố</p>
-                    <select class="search-option" name="search-option" id="search-option">
-                        <option value>- Tỉnh/thành phố</option>
-                        <option value="">TP.Đà Nẵng</option>
-                        <option value="">TP.Hồ Chí Minh</option>
-                        <option value="">TP.Hà Nội</option>
-                        <option value="">TP.Cần Thơ</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-3 search-item">
-                    <p class="search-text">Chọn quận/huyện</p>
-                    <select class="search-option" name="search-option" id="search-option">
-                        <option value>- Quận/huyện</option>
-                    </select>
-                </div>
-
-                <div class="col-12 col-md-3 search-item">
-                    <p class="search-text">Chọn loại bất động sản</p>
-                    <select class="search-option" name="search-option" id="search-option">
-                        <option value>- Loại bất động sản</option>
-                    </select>
-                </div>
-                <div class="col-12 col-md-3 search-btn">
-                    <button class="search-btn-text pb-0">
-                        <i class="fa-solid fa-magnifying-glass search-btn-icon"></i>
-                        <span>Tìm kiếm nhanh</span>
-                    </button>
-                </div>
+        <div class="search neon-search">
+            <div class="container">
+                <form:form id="formHot" action="/san-pham" method="GET" modelAttribute="modelSearchs">
+                    <div class="row" style="align-items: flex-end;">
+                        <div class="col-12 col-md-3">
+                            <div class="search-item">
+                                <p class="search-text">Chọn tỉnh/thành phố</p>
+                                <select class="search-option" style="font-size: 16px;">
+                                    <option value="" >- Tỉnh/thành phố</option>
+                                    <option value="">TP.Hà Nội</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="search-item">
+                                <p class="search-text">Chọn quận/huyện</p>
+                                <form:select class="form-control" path="district">
+                                    <form:option value="">--Chọn Quận--</form:option>
+                                    <form:options items="${districts}"/>
+                                </form:select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="search-item">
+                                <p class="search-text">Chọn loại bất động sản</p>
+                                <form:select class="form-control" path="type" multiple="none">
+                                    <form:option value="">--Loại bất động sản--</form:option>
+                                    <form:options items="${buildingsType}"/>
+                                </form:select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 ">
+                            <div class="search-btn">
+                                <button class="search-btn-text" id="btnFormHot">
+                                    <i class="fa-solid fa-magnifying-glass search-btn-icon"></i>
+                                    <span style="font-size: 16px;">Tìm kiếm nhanh</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form:form>
             </div>
         </div>
-    </div>
 
     <!-- CONTENT  -->
     <div class="product mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-4 mb-3">
-                    <div class="product1 vip">
-                        <div class="product1-image new"></div>
-
-                        <div class="product1-conntent">
-                            <div class="product1-conntent-header">
-                                <a href="">Căn hộ chung cư tại Sky Park Residence</a>
+                <c:forEach var="item" items="${buildingLists}">
+                    <div class="col-12 col-md-4 mb-3">
+                        <div class="product1 vip" style="border-radius: 10px;">
+                            <div class="new">
+                                <c:choose>
+                                    <c:when test="${not empty item.image}">
+                                        <img class="viewImage"
+                                             src="${pageContext.request.contextPath}/repository${item.image}"
+                                             style="object-fit:cover;border:1px solid #ccc; width: 100%; height: 15.525rem; border-top-left-radius: 10px;
+        border-top-right-radius: 10px;"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="viewImage"
+                                             src="${pageContext.request.contextPath}/img/loading.gif"
+                                             style="object-fit:cover;border:1px solid #ccc; width: 100%; height: 15.525rem; border-top-left-radius: 10px;
+        border-top-right-radius: 10px;"/>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
-                            <span class="product1-conntent-title">Dự án Sky Park Residence số 3 Tôn Thất Thuyết đang
+                            <div class="product1-conntent">
+                                <div class="product1-conntent-header">
+                                    <a href="">${item.name}</a>
+                                </div>
+                                <span class="product1-conntent-title">Dự án Sky Park Residence số 3 Tôn Thất Thuyết đang
                                     trong quá trình hoàn thiện để đáp ứng tiến độ bàn giao nhà trong năm 2018. Khách
                                     hàng có thể thăm quan và giám sát trực tiếp chất lương công trình cũng như thưởng
                                     ngoạn tầm view tuyệt đẹp ra hai công viên lớn nhất quận Cầu Giấy.</span>
-                            <ul class="product1-conntent-list">
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Số 03 Tôn Thất thuyết</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-building"></i>
-                                    <span>Loại BĐS: Chung cư</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-earth-asia"></i>
-                                    <span>Diện tích: 78m2 - 146m2</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product1-footer">
-                            <span class="product1-footer-cost">2,5 Tỷ</span>
-                            <button class="product1-footer-detail"><a href="./ChiTiet.html" style="color:#fff">Xem
-                                chi
-                                tiết</a></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="product1 vip">
-                        <div class="product1-image new"></div>
-
-                        <div class="product1-conntent">
-                            <div class="product1-conntent-header">
-                                <a href="">Căn hộ chung cư tại Sky Park Residence</a>
+                                <ul class="product1-conntent-list">
+                                    <li class="product1-conntent-item">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>${item.address}</span>
+                                    </li>
+                                    <li class="product1-conntent-item">
+                                        <i class="fa-solid fa-building"></i>
+                                        <span>Loại BĐS: Chung cư</span>
+                                    </li>
+                                    <li class="product1-conntent-item">
+                                        <i class="fa-solid fa-earth-asia"></i>
+                                        <span>Diện tích: ${item.floorArea}m2</span>
+                                    </li>
+                                </ul>
                             </div>
-                            <span class="product1-conntent-title">Dự án Sky Park Residence số 3 Tôn Thất Thuyết đang
-                                    trong quá trình hoàn thiện để đáp ứng tiến độ bàn giao nhà trong năm 2018. Khách
-                                    hàng có thể thăm quan và giám sát trực tiếp chất lương công trình cũng như thưởng
-                                    ngoạn tầm view tuyệt đẹp ra hai công viên lớn nhất quận Cầu Giấy.</span>
-                            <ul class="product1-conntent-list">
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Số 03 Tôn Thất thuyết</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-building"></i>
-                                    <span>Loại BĐS: Chung cư</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-earth-asia"></i>
-                                    <span>Diện tích: 78m2 - 146m2</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product1-footer">
-                            <span class="product1-footer-cost">2,5 Tỷ</span>
-                            <button class="product1-footer-detail"><a href="./ChiTiet.html" style="color:#fff">Xem
-                                chi
-                                tiết</a></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="product1 vip">
-                        <div class="product1-image new"></div>
-
-                        <div class="product1-conntent">
-                            <div class="product1-conntent-header">
-                                <a href="">Căn hộ chung cư tại Sky Park Residence</a>
+                            <div class="product1-footer">
+                                <span class="product1-footer-cost">${item.rentPrice}/m2</span>
+                                <button class="product1-footer-detail cssdep"><a href="" style="color:#fff">Xem
+                                    chi
+                                    tiết</a></button>
                             </div>
-                            <span class="product1-conntent-title">Dự án Sky Park Residence số 3 Tôn Thất Thuyết đang
-                                    trong quá trình hoàn thiện để đáp ứng tiến độ bàn giao nhà trong năm 2018. Khách
-                                    hàng có thể thăm quan và giám sát trực tiếp chất lương công trình cũng như thưởng
-                                    ngoạn tầm view tuyệt đẹp ra hai công viên lớn nhất quận Cầu Giấy.</span>
-                            <ul class="product1-conntent-list">
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Số 03 Tôn Thất thuyết</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-building"></i>
-                                    <span>Loại BĐS: Chung cư</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-earth-asia"></i>
-                                    <span>Diện tích: 78m2 - 146m2</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product1-footer">
-                            <span class="product1-footer-cost">2,5 Tỷ</span>
-                            <button class="product1-footer-detail"><a href="./ChiTiet.html" style="color:#fff">Xem
-                                chi
-                                tiết</a></button>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="product1 vip">
-                        <div class="product1-image new"></div>
 
-                        <div class="product1-conntent">
-                            <div class="product1-conntent-header">
-                                <a href="">Căn hộ chung cư tại Sky Park Residence</a>
-                            </div>
-                            <span class="product1-conntent-title">Dự án Sky Park Residence số 3 Tôn Thất Thuyết đang
-                                    trong quá trình hoàn thiện để đáp ứng tiến độ bàn giao nhà trong năm 2018. Khách
-                                    hàng có thể thăm quan và giám sát trực tiếp chất lương công trình cũng như thưởng
-                                    ngoạn tầm view tuyệt đẹp ra hai công viên lớn nhất quận Cầu Giấy.</span>
-                            <ul class="product1-conntent-list">
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Số 03 Tôn Thất thuyết</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-building"></i>
-                                    <span>Loại BĐS: Chung cư</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-earth-asia"></i>
-                                    <span>Diện tích: 78m2 - 146m2</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product1-footer">
-                            <span class="product1-footer-cost">2,5 Tỷ</span>
-                            <button class="product1-footer-detail"><a href="./ChiTiet.html" style="color:#fff">Xem
-                                chi
-                                tiết</a></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="product1 vip">
-                        <div class="product1-image new"></div>
+                </c:forEach>
 
-                        <div class="product1-conntent">
-                            <div class="product1-conntent-header">
-                                <a href="">Căn hộ chung cư tại Sky Park Residence</a>
-                            </div>
-                            <span class="product1-conntent-title">Dự án Sky Park Residence số 3 Tôn Thất Thuyết đang
-                                    trong quá trình hoàn thiện để đáp ứng tiến độ bàn giao nhà trong năm 2018. Khách
-                                    hàng có thể thăm quan và giám sát trực tiếp chất lương công trình cũng như thưởng
-                                    ngoạn tầm view tuyệt đẹp ra hai công viên lớn nhất quận Cầu Giấy.</span>
-                            <ul class="product1-conntent-list">
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Số 03 Tôn Thất thuyết</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-building"></i>
-                                    <span>Loại BĐS: Chung cư</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-earth-asia"></i>
-                                    <span>Diện tích: 78m2 - 146m2</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product1-footer">
-                            <span class="product1-footer-cost">2,5 Tỷ</span>
-                            <button class="product1-footer-detail"><a href="./ChiTiet.html" style="color:#fff">Xem
-                                chi
-                                tiết</a></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="product1 vip">
-                        <div class="product1-image new"></div>
-
-                        <div class="product1-conntent">
-                            <div class="product1-conntent-header">
-                                <a href="">Căn hộ chung cư tại Sky Park Residence</a>
-                            </div>
-                            <span class="product1-conntent-title">Dự án Sky Park Residence số 3 Tôn Thất Thuyết đang
-                                    trong quá trình hoàn thiện để đáp ứng tiến độ bàn giao nhà trong năm 2018. Khách
-                                    hàng có thể thăm quan và giám sát trực tiếp chất lương công trình cũng như thưởng
-                                    ngoạn tầm view tuyệt đẹp ra hai công viên lớn nhất quận Cầu Giấy.</span>
-                            <ul class="product1-conntent-list">
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Số 03 Tôn Thất thuyết</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-building"></i>
-                                    <span>Loại BĐS: Chung cư</span>
-                                </li>
-                                <li class="product1-conntent-item">
-                                    <i class="fa-solid fa-earth-asia"></i>
-                                    <span>Diện tích: 78m2 - 146m2</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product1-footer">
-                            <span class="product1-footer-cost">2,5 Tỷ</span>
-                            <button class="product1-footer-detail"><a href="./ChiTiet.html" style="color:#fff">Xem
-                                chi
-                                tiết</a></button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -438,6 +288,121 @@
         </footer>
     </div>
 </div>
+<script>
+    $('#btnFormHot').click(function (e){
+        e.preventDefault();
+        $('#formHot').submit();
+    });
+</script>
+<style>
+    /* ===== NEON SEARCH BAR ===== */
+    .neon-search {
+        background: linear-gradient(
+                270deg,
+                #00f5ff,
+                #00ff85,
+                #a855f7,
+                #00f5ff
+        );
+        background-size: 600% 600%;
+        animation: neonFlow 8s ease infinite;
+
+        padding: 24px;
+        border-radius: 0 0 14px 14px;
+        box-shadow:
+                0 0 15px rgba(0, 245, 255, 0.6),
+                0 0 30px rgba(0, 255, 133, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.15);
+    }
+
+    /* ===== ANIMATION ===== */
+    @keyframes neonFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* ===== SELECT + BUTTON ===== */
+    .neon-search select,
+    .neon-search button {
+        background: rgba(0, 0, 0, 0.35);
+        color: #000000;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+
+        box-shadow:
+                0 0 8px rgba(0, 245, 255, 0.6),
+                inset 0 0 6px rgba(255, 255, 255, 0.2);
+
+        transition: all 0.3s ease;
+        font-weight:600;
+    }
+
+    /* ===== HOVER EFFECT ===== */
+    .neon-search select:hover,
+    .neon-search button:hover {
+        color: #00f5ff !important;
+        background: rgba(0, 0, 0, 0.55);
+        box-shadow:
+                0 0 14px rgba(168, 85, 247, 0.9),
+                0 0 28px rgba(0, 245, 255, 0.8);
+        transform: translateY(-2px);
+    }
+
+    /* ===== BUTTON RIÊNG ===== */
+    .neon-search button {
+        background: linear-gradient(135deg, #00f5ff, #a855f7);
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* ===== TEXT ===== */
+    .neon-search label {
+        color: #eaffff;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+    }
+    .cssdep {
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        box-shadow: 0 0 8px rgba(0, 245, 255, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #00f5ff, #a855f7);
+    }
+    .css a {
+        color: #000000 !important;
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    .cssdep a:hover {
+        color: #00f5ff !important;
+        text-decoration: none;
+    }
+    .cssdep:hover {
+        color: #00f5ff !important;
+        background: rgba(0, 0, 0, 0.55);
+        box-shadow:
+                0 0 14px rgba(168, 85, 247, 0.9),
+                0 0 28px rgba(0, 245, 255, 0.8);
+        transform: translateY(-2px);
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: #f4f7fa;
+    }
+
+
+    .page-wrapper {
+        min-height: 100vh;
+        background: #f4f7fa;
+    }
+
+</style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>

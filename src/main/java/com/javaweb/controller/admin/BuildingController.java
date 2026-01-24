@@ -1,7 +1,5 @@
 package com.javaweb.controller.admin;
 
-
-
 import com.javaweb.enums.buildingType;
 import com.javaweb.enums.districtCode;
 import com.javaweb.model.dto.BuildingDTO;
@@ -57,6 +55,5 @@ public class BuildingController {
         mav.addObject("typeCodes", buildingType.type());
         return mav;
     }
-
 
 }

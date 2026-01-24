@@ -16,8 +16,17 @@ public class BuildingSearchResponse extends AbstractDTO {
     private Long rentPrice;
     private String serviceFee;
     private Double brokerageFee;
+    private String image;
 
-	public Long getId() {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Long getId() {
 		return id;
 	}
 

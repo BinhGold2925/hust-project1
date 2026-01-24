@@ -22,12 +22,22 @@ public class CustomerEntity {
     private String demand;
     @Column(name="status")
     private String status;
+    @Column(name="note")
+    private String note;
 
     @ManyToMany(mappedBy = "customers", fetch = FetchType.LAZY)
     private List<UserEntity> user = new ArrayList<>();
 
     @OneToMany(mappedBy = "customerEntity", fetch = FetchType.LAZY)
     private List<TransactionEntity> transactions = new ArrayList<>();
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public Long getId() {
         return id;

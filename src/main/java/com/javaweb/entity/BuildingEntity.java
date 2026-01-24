@@ -58,6 +58,16 @@ public class BuildingEntity {
     private String district;
     @Column(name="type")
     private String type;
+    @Column(name = "avatar")
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "assignmentbuilding",

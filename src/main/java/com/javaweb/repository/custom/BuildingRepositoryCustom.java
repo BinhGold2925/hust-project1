@@ -5,6 +5,7 @@ import com.javaweb.model.request.BuildingSearchRequest;
 
 import java.util.List;
 
+
 public interface BuildingRepositoryCustom {
     List<BuildingEntity> findFilter(BuildingSearchRequest buildingSearchRequest);
 }

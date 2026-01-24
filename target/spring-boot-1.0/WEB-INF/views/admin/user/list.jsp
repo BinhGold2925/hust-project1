@@ -42,6 +42,11 @@
                 <!-- /.breadcrumb -->
             </div>
             <div class="page-content" style="background: #FEFBF7;">
+                <div class="page-header">
+                    <h1>
+                        Danh sách khách hàng
+                    </h1>
+                </div><!-- /.page-header -->
                 <div class="row">
                     <div class="col-xs-12">
                         <c:if test="${messageResponse!=null}">
@@ -85,7 +90,7 @@
                                                     <label class="col-sm-2 control-label"></label>
                                                     <div class="col-sm-8">
                                                         <button id="btnSearch" type="button"
-                                                                class="btn btn-sm btn-success">
+                                                                class="btn-sm cssdep">
                                                                 <%--spring:message code="label.search"/>--%>
                                                             Tìm kiếm
                                                             <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
@@ -105,7 +110,7 @@
                                                 <%--title='<spring:message code="label.user.add"/>'--%>
                                                title="Thêm người dùng"
                                                href='<c:url value="/admin/user-edit"/>'>
-															<span>
+															<span style="font-size: 25px;">
 																<i class="fa fa-plus-circle bigger-110 purple"></i>
 															</span>
                                             </a>
@@ -113,7 +118,7 @@
                                                     class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
                                                     data-toggle="tooltip"
                                                     title="Xóa bài viết" onclick="warningBeforeDelete()">
-															<span>
+															<span style="font-size: 25px;">
 																<i class="fa fa-trash-o bigger-110 pink"></i>
 															</span>
                                             </button>
@@ -124,7 +129,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="table-responsive">
+                                <div class="table-responsive" style="text-align: center;">
                                     <display:table name="model.listResult" cellspacing="0" cellpadding="0"
                                                    requestURI="${formUrl}" partialList="true" sort="external"
                                                    size="${model.totalItems}" defaultsort="2" defaultorder="ascending"
@@ -212,6 +217,191 @@
         background: #FEFBF7;
     }
 </style>
+<style>
+
+    .table-striped>tbody>tr:nth-child(odd) {
+        background-color: #FEFBF7;
+    }
+    .table-striped>tbody>tr:nth-child(even) {
+        background-color: #FEFBF7;
+    }
+        /* 1. Tổng thể nền và Font chữ */
+    body, .main-content, .page-content {
+        background-color: #F8F9FA !important; /* Xám nhạt hiện đại */
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* 2. Làm đẹp Breadcrumbs */
+    .breadcrumb {
+        background-color: transparent;
+        padding: 15px 0;
+    }
+
+    /* 3. Tiêu đề trang */
+    .page-header h1 {
+        color: #2C3E50;
+        font-weight: 600;
+        font-size: 24px;
+    }
+
+    /* 4. Widget Box (Khu vực Tìm Kiếm) */
+    .widget-box {
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        overflow: hidden;
+
+    }
+
+    .widget-header {
+        background: #FFF0E5 !important; /* Màu cam nhạt bạn đã chọn */
+        border-bottom: 1px solid #FFE0CC;
+        padding: 10px 20px 5px 20px;
+    }
+
+    .widget-title {
+        color: #D35400 !important;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 20px;
+    }
+
+    /* 5. Form Input và Label */
+    .form-control, select, input[type="text"] {
+        border-radius: 8px !important;
+        border: 1px solid #DCE1E5;
+        height: 38px;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #E67E22;
+        box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+    }
+
+    label.name {
+        font-weight: 600;
+        color: #546E7A;
+        margin-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* 6. Checkbox group */
+    .checkboxes label {
+        margin-right: 15px;
+        font-weight: 400;
+    }
+
+    /* 7. Nút bấm (Buttons) */
+    .btn {
+        border-width: 0;
+        font-weight: 600;
+        padding: 8px 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-danger { background-color: #E74C3C !important; }
+    .btn-success { background-color: #2ECC71 !important; }
+    .btn-info { background-color: #3498DB !important; }
+
+    /* 8. Làm đẹp Bảng (Table) */
+#tableList {
+    background-color: white;
+    border-radius: 12px !important;
+    border-collapse: separate !important; /* Thay collapse bằng separate để hiện border-radius */
+    border-spacing: 0; /* Giúp các ô vẫn khít nhau như collapse */
+    overflow: hidden;
+    border: 1px solid #DCE1E5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    width: 100%;
+}
+
+#tableList thead tr {
+    background: #FFF0E5 !important;
+}
+
+#tableList thead th {
+    border-bottom: 1px solid #FFE0CC !important;
+    border-right: 1px solid #FFE0CC !important; /* Kẻ dọc cho tiêu đề */
+    color: #D35400;
+    text-align: center;
+    padding: 12px 8px;
+}
+
+#tableList tbody td {
+    vertical-align: middle;
+    border-bottom: 1px solid #F1F1F1 !important;
+    border-right: 1px solid #F1F1F1 !important; /* Kẻ dọc cho nội dung */
+    padding: 10px 8px;
+}
+
+/* Xóa đường kẻ bên phải của cột cuối cùng để không bị dày viền bảng */
+#tableList th:last-child,
+#tableList td:last-child {
+    border-right: none !important;
+}
+
+/* Xóa đường kẻ dưới cùng của hàng cuối cùng để không đè lên góc bo */
+#tableList tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+/* Bo góc thủ công cho các ô ở 4 góc để màu nền không đè lên góc bo của bảng */
+#tableList thead tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+#tableList thead tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+}
+#tableList tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+#tableList tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+    /* 9. Nhóm nút thao tác trong bảng */
+    .btn-group .btn {
+        margin-right: 15px;
+        border-radius: 50% !important; /* Nút tròn nhỏ chuyên nghiệp */
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .main-content .checkboxes{
+            display: flex;
+        }
+        .main-content .checkboxes span{
+            padding-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .main-content .checkboxes span input{
+           margin: 0;
+        }
+        .main-content .checkboxes span label{
+            padding-left: 3px;
+           margin: 0;
+        }
+        .main-container:before{
+           background-color: #f4f7fa !important;
+        }
+        .page-content {
+        background-color: #f4f7fa !important; /* Màu nền sang trọng hơn */
+
+    }
+
+    </style>
  <style>
     /* 1. Tổng thể thanh Breadcrumbs - Nền Gradient rực rỡ */
     #breadcrumbs.breadcrumbs {
@@ -308,6 +498,37 @@
 <style>
     .sidebar.menu-min .sidebar-shortcuts {
         z-index: 100;
+    }
+    .cssdep {
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        box-shadow: 0 0 8px rgba(0, 245, 255, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #00f5ff, #a855f7);
+        padding: 8px 20px;
+        color: #000000 !important;
+        font-size: 15px;
+    }
+    .css a {
+        color: #000000 !important;
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    .cssdep a:hover {
+        color: #00f5ff !important;
+        text-decoration: none;
+    }
+    .cssdep:hover {
+        color: #00f5ff !important;
+        background: rgba(0, 0, 0, 0.55);
+        box-shadow:
+                0 0 14px rgba(168, 85, 247, 0.9),
+                0 0 28px rgba(0, 245, 255, 0.8);
+        transform: translateY(-2px);
     }
 </style>
 </body>

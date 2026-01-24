@@ -151,7 +151,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12">
                                                     <div class="col-xs-6">
-                                                        <button class="btn btn-danger" id="btnSearchBuilding" style="border-radius: 10px;">Tìm
+                                                        <button class="cssdep" id="btnSearchBuilding" style="border-radius: 10px;">Tìm
                                                             Kiếm</button>
                                                     </div>
                                                 </div>
@@ -166,12 +166,12 @@
                     <div class="col-xs-12">
                         <div class="pull-right">
                             <a href='/admin/building-edit'>
-                                <button class="btn btn-success" style="border-radius: 10px;">
+                                <button class="cssdep" style="border-radius: 10px;">
                                     <i class="ace-icon glyphicon glyphicon-plus"></i>
                                     Thêm Tòa Nhà
                                 </button>
                             </a>
-                            <button class="btn btn-danger" id="btnDeleteBuilding" style="border-radius: 10px;">
+                            <button class="cssdep" id="btnDeleteBuilding" style="border-radius: 10px;">
                                 <i class="ace-icon glyphicon glyphicon-minus"></i>
                                 Xóa Toàn Bộ
                             </button>
@@ -897,6 +897,37 @@
 <style>
     .sidebar.menu-min .sidebar-shortcuts {
         z-index: 100;
+    }
+    .cssdep {
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        box-shadow: 0 0 8px rgba(0, 245, 255, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #00f5ff, #a855f7);
+        padding: 8px 20px;
+        color: #000000 !important;
+        font-size: 15px;
+    }
+    .css a {
+        color: #000000 !important;
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    .cssdep a:hover {
+        color: #00f5ff !important;
+        text-decoration: none;
+    }
+    .cssdep:hover {
+        color: #00f5ff !important;
+        background: rgba(0, 0, 0, 0.55);
+        box-shadow:
+                0 0 14px rgba(168, 85, 247, 0.9),
+                0 0 28px rgba(0, 245, 255, 0.8);
+        transform: translateY(-2px);
     }
 </style>
 

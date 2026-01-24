@@ -11,15 +11,19 @@ import java.io.IOException;
 public class UploadFileUtils {
 
     public void writeOrUpdate(String path, byte[] bytes) {
-        path = "C://home/office" + path;
-        File file = new File(StringUtils.substringBeforeLast(path, "/"));
-        if (!file.exists()) {
-            file.mkdir();
+        // path = /building/ANH2.png
+        String fullPath = "C:/home/office" + path;
+
+        File parentDir = new File(StringUtils.substringBeforeLast(fullPath, "/"));
+        if (!parentDir.exists()) {
+            parentDir.mkdirs(); // 🔥 RẤT QUAN TRỌNG
         }
-        try (FileOutputStream fop = new FileOutputStream(path)) {
+
+        try (FileOutputStream fop = new FileOutputStream(fullPath)) {
             fop.write(bytes);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+

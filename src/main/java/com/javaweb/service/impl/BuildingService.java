@@ -15,10 +15,13 @@ import com.javaweb.repository.RentAreaRepository;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.service.IBuildingService;
+import com.javaweb.utils.UploadFileUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,8 @@ public class BuildingService implements IBuildingService {
     private RentAreaConverter rentAreaConverter;
     @Autowired
     private RentAreaRepository rentAreaRepository;
+    @Autowired
+    private UploadFileUtils uploadFileUtils;
 
 
     @Override
@@ -136,7 +141,12 @@ public class BuildingService implements IBuildingService {
         if (buildingDTO.getTypeCode() != null) {
             building.setType(String.join(",", buildingDTO.getTypeCode()));
         }
-
+        if(buildingDTO.getId() != null){
+            BuildingEntity foundBuilding = buildingRepository.findById(buildingDTO.getId())
+                    .orElseThrow(() -> new RuntimeException("Building not found"));
+            building.setImage(foundBuilding.getImage());
+        }
+        saveThumbnail(buildingDTO, building);
         // ===== SAVE BUILDING =====
         building = buildingRepository.save(building);
 
@@ -151,6 +161,24 @@ public class BuildingService implements IBuildingService {
         building.setRentAreaEntities(rentAreas);
 
         return buildingConverter.convertToDTO(building);
+    }
+    private void saveThumbnail(BuildingDTO dto, BuildingEntity entity) {
+
+        if (dto.getImageBase64() == null || dto.getImageName() == null) return;
+
+        String path = "/building/" + dto.getImageName();
+
+        if (entity.getImage() != null && !entity.getImage().equals(path)) {
+            File oldFile = new File("C:/home/office" + entity.getImage());
+            if (oldFile.exists()) oldFile.delete();
+        }
+
+        String base64 = dto.getImageBase64();
+        base64 = base64.substring(base64.indexOf(",") + 1);
+        byte[] bytes = Base64.decodeBase64(base64);
+
+        uploadFileUtils.writeOrUpdate(path, bytes);
+        entity.setImage(path);
     }
 
 

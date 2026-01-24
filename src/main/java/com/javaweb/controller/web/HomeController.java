@@ -1,13 +1,19 @@
 package com.javaweb.controller.web;
 
 import com.javaweb.enums.buildingType;
+import com.javaweb.model.dto.BuildingDTO;
+import com.javaweb.model.dto.CustomerDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
+import com.javaweb.model.response.BuildingSearchResponse;
+import com.javaweb.service.IBuildingService;
 import com.javaweb.utils.DistrictCode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,13 +21,19 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller(value = "homeControllerOfWeb")
 public class HomeController {
+    @Autowired
+    private IBuildingService buildingService;
 
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/home");
+        mav.addObject("modelSearch", buildingSearchRequest);
+        List<BuildingSearchResponse> reponseList = buildingService.listBuildingFindFilter(buildingSearchRequest);
+        mav.addObject("buildingList", reponseList);
         mav.addObject("modelSearch", buildingSearchRequest);
         mav.addObject("districts", DistrictCode.type());
         mav.addObject("buildingsType", buildingType.type());
@@ -35,8 +47,14 @@ public class HomeController {
     }
 
     @GetMapping(value="/san-pham")
-    public ModelAndView buidingList(){
+    public ModelAndView buidingList(BuildingSearchRequest buildingSearchRequest, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/web/list");
+        mav.addObject("modelSearchs", buildingSearchRequest);
+        List<BuildingSearchResponse> reponseLists = buildingService.listBuildingFindFilter(buildingSearchRequest);
+        mav.addObject("buildingLists", reponseLists);
+        mav.addObject("modelSearch", buildingSearchRequest);
+        mav.addObject("districts", DistrictCode.type());
+        mav.addObject("buildingsType", buildingType.type());
         return mav;
     }
 
@@ -47,8 +65,9 @@ public class HomeController {
     }
 
     @GetMapping(value="/lien-he")
-    public ModelAndView contact(){
+    public ModelAndView contact(@ModelAttribute CustomerDTO customerDTO, HttpServletRequest request){
         ModelAndView mav = new ModelAndView("/web/contact");
+        mav.addObject("model", customerDTO);
         return mav;
     }
 
